@@ -5,6 +5,7 @@
 // @include   http://unitrix.net/*
 // @grant     GM_xmlhttpRequest
 // @noframes
+// @connect   rotool.gungho.jp
 // ==/UserScript==
 
 const worlds = ['Placeholder', 'Sigrun', 'Alvitr', 'Vali', 'Trudr', 'Radgrid', 'Olrun', 'Gimle', 'Hervor', 'Idavoll', 'Frigg', 'Mimir', 'Lif', 'Breidablik'];
