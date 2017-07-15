@@ -1,6 +1,6 @@
 ﻿// ==UserScript==
 // @name      ragnarok unitrix with sold
-// @version   1.3
+// @version   1.4
 // @author    ebith
 // @include   http://unitrix.net/*
 // @grant     GM_xmlhttpRequest
@@ -46,7 +46,7 @@ const getHistory = () => {
         let span = `<span>${v.log_date}: ${v.price_per}`;
         if (v.item_count - 0 > 1) { span += ` * ${v.item_count}`; }
         if ((v.enchant_flag + v.card_flag + v.refining_level + v.attribute__stone) - 0 > 0 ) {
-          span += ` <a href='http://rotool.gungho.jp/torihiki/log_detail.php?log=${v.row_id}'>詳細</a>`;
+          span += ` <a href='http://rotool.gungho.jp/torihiki/log_detail.php?log=${v.row_id}' onmouseover='getDetail(this, ${v.row_id});' onmouseout='eventBaloonHide();'>詳細</a>`;
         }
         span += '</span></br>';
         div.insertAdjacentHTML('beforeend', span);
@@ -60,3 +60,23 @@ exportFunction(getHistory, unsafeWindow, {defineAs: 'getHistory'});
 
 let page = 1;
 getHistory();
+
+exportFunction((element, id) => {
+  GM_xmlhttpRequest({
+    method: 'GET',
+    url: `http://rotool.gungho.jp/torihiki/log_detail.php?log=${id}`,
+    onload: (response) => {
+      const parser = new DOMParser();
+      const html = parser.parseFromString(response.responseText, 'text/html');
+      const [,, enchants, level] = Array.from(html.querySelector('.datatable tbody').children, (tr) => { return tr.children[1].innerHTML.trim(); });
+      let text = [];
+      if (level) {
+        text.push(`+${level}`);
+      }
+      if (enchants != 'なし') {
+        text.push(`${enchants}`);
+      }
+      unsafeWindow.eventBaloonShow(element, unsafeWindow.layoutText(text.join('<br>')));
+    }
+  });
+}, unsafeWindow, {defineAs: 'getDetail'});
