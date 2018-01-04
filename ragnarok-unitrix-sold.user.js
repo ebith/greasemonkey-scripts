@@ -1,12 +1,18 @@
 ﻿// ==UserScript==
 // @name      ragnarok unitrix with sold
-// @version   1.4
+// @version   1.5
 // @author    ebith
 // @include   http://unitrix.net/*
 // @grant     GM_xmlhttpRequest
 // @noframes
 // @connect   rotool.gungho.jp
 // ==/UserScript==
+const exportFunction = (func, scope, options) => {
+    if (options && options.defineAs) {
+        scope[options.defineAs] = func;
+    }
+    return func;
+};
 
 const worlds = ['Placeholder', 'Sigrun', 'Alvitr', 'Vali', 'Trudr', 'Radgrid', 'Olrun', 'Gimle', 'Hervor', 'Idavoll', 'Frigg', 'Mimir', 'Lif', 'Breidablik'];
 const searchParams = new URLSearchParams(document.location.search);

@@ -1,11 +1,9 @@
 // ==UserScript==
 // @name atwiki swap title
-// @version 1.0
+// @version 1.1
 // @author ebith
 // @include /^https?://www\d+.atwiki.jp//
 // @noframes
 // ==/UserScript==
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.title = document.title.replace(/(.*) - (.*)/, '$2 - $1');
-});
+document.title = document.title.replace(/(.*) - (.*)/, '$2 - $1');
