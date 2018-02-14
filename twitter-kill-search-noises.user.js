@@ -5,6 +5,7 @@
 // @include   https://twitter.com/search*
 // @noframes
 // @grant     none
+// @run-at    document-end
 // ==/UserScript==
 // const iframe = document.body.appendChild(document.createElement('iframe'));
 // window.console = iframe.contentWindow.console;
@@ -22,7 +23,7 @@ const re = new RegExp(searchTexts.join('|'), 'i');
 const killNoises = nodes => {
   for (const node of nodes) {
     const tweet = node.querySelector('.tweet');
-    const usernames = `${tweet.dataset.screenName} ${tweet.dataset.mentions ? tweet.dataset.mentions : ''}`;
+    const usernames = `${tweet.dataset.screenName} ${tweet.dataset.name} ${tweet.dataset.mentions ? tweet.dataset.mentions : ''}`;
     if (re.test(usernames)) {
       node.style = 'display: none;';
     }
