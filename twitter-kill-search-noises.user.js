@@ -5,7 +5,6 @@
 // @include   https://twitter.com/search*
 // @noframes
 // @grant     none
-// @run-at    document-end
 // ==/UserScript==
 // const iframe = document.body.appendChild(document.createElement('iframe'));
 // window.console = iframe.contentWindow.console;
