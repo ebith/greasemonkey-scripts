@@ -2,7 +2,7 @@
 // @name        Add a link to SteamDB on the Epic Games Store transaction page
 // @match       https://www.epicgames.com/account/transactions*
 // @grant       none
-// @version     1.0
+// @version     1.1
 // @author      ebith
 // @downloadURL https://github.com/ebith/greasemonkey-scripts/raw/master/add-steamdb-link-to-epicgames-transactions.user.js
 // ==/UserScript==
@@ -10,7 +10,6 @@
 const addLink = () => {
   for (const tbody of document.querySelectorAll('table tbody')) {
     const td = tbody.querySelector('td:nth-child(2)')
-    console.log(td.textContent)
     td.insertAdjacentHTML(
       'beforeend',
       ` <a target="_blank" href="https://steamdb.info/instantsearch/?query=${encodeURIComponent(
